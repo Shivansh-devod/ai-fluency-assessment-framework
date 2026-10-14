@@ -14,6 +14,15 @@ export function createAdminClient() {
     );
   }
 
+  if (
+    url.includes("YOUR_PROJECT") ||
+    serviceRoleKey.includes("your-service-role-key")
+  ) {
+    throw new Error(
+      "Placeholder keys detected in .env.local. Please create a project at https://supabase.com, copy your project URL and service-role key into .env.local, and run db/migrations/000_health.sql in the Supabase SQL Editor."
+    );
+  }
+
   return createClient(url, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
